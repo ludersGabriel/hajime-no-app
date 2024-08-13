@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: hajime_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - hajime_network
+    volumes:
+      - hajime_data:/var/lib/postgresql/data
+
+volumes:
+  hajime_data:
+
+networks:
+  hajime_network:

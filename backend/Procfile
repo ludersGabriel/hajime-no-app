@@ -1,0 +1,3 @@
+web: bun start
+
+release: bun db:migrate && bun db:seed

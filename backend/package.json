@@ -1,0 +1,39 @@
+{
+  "name": "hono-backend",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "cross-env DB_MIGRATING=true bun run src/db/migrate.ts",
+    "db:seed": "cross-env DB_SEEDING=true bun run src/db/seed.ts",
+    "db:studio": "drizzle-kit studio",
+    "route:test": "bun db:seed && bun test",
+    "build": "bun --target bun build ./src/index.ts --outdir ./build",
+    "start": "bun build/index.js"
+  },
+  "dependencies": {
+    "@hono/swagger-ui": "^0.4.0",
+    "@hono/zod-validator": "^0.2.2",
+    "csv-simple-parser": "^1.0.3",
+    "dotenv": "^16.4.5",
+    "dotenv-expand": "^11.0.6",
+    "drizzle-orm": "^0.33.0",
+    "drizzle-zod": "^0.5.1",
+    "hono": "^4.5.5",
+    "postgres": "^3.4.4",
+    "reflect-metadata": "^0.2.2",
+    "typedi": "^0.10.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@anatine/zod-openapi": "^2.2.6",
+    "@eslint/js": "^9.9.0",
+    "@types/bun": "^1.1.6",
+    "cross-env": "^7.0.3",
+    "drizzle-kit": "^0.24.0",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
+    "typescript-eslint": "^8.1.0"
+  }
+}

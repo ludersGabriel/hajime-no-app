@@ -1,0 +1,2971 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "hajiem-backend",
+    "description": "Hajime no app core api",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/ichigo",
+      "description": "development"
+    },
+    {
+      "url": "https://ichigo-api-ff773ad6550c.herokuapp.com/ichigo",
+      "description": "production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "address"
+    },
+    {
+      "name": "auth"
+    },
+    {
+      "name": "client"
+    },
+    {
+      "name": "credit-card"
+    },
+    {
+      "name": "department"
+    },
+    {
+      "name": "historical-pricing"
+    },
+    {
+      "name": "product"
+    },
+    {
+      "name": "scanned-tag"
+    },
+    {
+      "name": "store"
+    },
+    {
+      "name": "tag"
+    },
+    {
+      "name": "upload"
+    },
+    {
+      "name": "user"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "cpf": {
+            "type": "string",
+            "maxLength": 11
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "storeId",
+          "name",
+          "username",
+          "email",
+          "cpf",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UserInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "number"
+          },
+          "username": {
+            "type": "number",
+            "maxLength": 255
+          },
+          "password": {
+            "type": "number",
+            "maxLength": 255
+          },
+          "email": {
+            "type": "number",
+            "maxLength": 255
+          },
+          "cpf": {
+            "type": "number",
+            "maxLength": 11
+          },
+          "createdAt": {
+            "type": "number"
+          },
+          "updatedAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "storeId",
+          "name",
+          "username",
+          "password",
+          "email",
+          "cpf"
+        ]
+      },
+      "UserUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "number"
+          },
+          "username": {
+            "type": "number",
+            "maxLength": 255
+          },
+          "password": {
+            "type": "number",
+            "maxLength": 255
+          },
+          "email": {
+            "type": "number",
+            "maxLength": 255
+          },
+          "cpf": {
+            "type": "number",
+            "maxLength": 11
+          },
+          "createdAt": {
+            "type": "number"
+          },
+          "updatedAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "StoreDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clientId": {
+            "type": "number"
+          },
+          "managerId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "employees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "clientId",
+          "name",
+          "description",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "StoreInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clientId": {
+            "type": "number"
+          },
+          "managerId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "clientId",
+          "name",
+          "description"
+        ]
+      },
+      "StoreUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clientId": {
+            "type": "number"
+          },
+          "managerId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "AddressDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "street": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "zipCode": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "store": {
+            "$ref": "#/components/schemas/StoreDto"
+          }
+        },
+        "required": [
+          "id",
+          "storeId",
+          "street",
+          "city",
+          "state",
+          "zipCode",
+          "country",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "AddressInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "street": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "zipCode": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "storeId",
+          "street",
+          "city",
+          "state",
+          "zipCode",
+          "country"
+        ]
+      },
+      "AddressUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "street": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "zipCode": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ClientDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "cnpj": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "industry": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "hqAddress": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "contactPerson": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "creditCards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreditCardDto"
+            }
+          },
+          "stores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoreDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "cnpj",
+          "industry",
+          "hqAddress",
+          "phone",
+          "email",
+          "contactPerson",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ClientInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "cnpj": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "industry": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "hqAddress": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 255,
+            "format": "email"
+          },
+          "contactPerson": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "cnpj"
+        ]
+      },
+      "ClientUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "cnpj": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "industry": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "hqAddress": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 255,
+            "format": "email"
+          },
+          "contactPerson": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ProductDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "ean13": {
+            "type": "string",
+            "maxLength": 13
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagDto"
+            }
+          },
+          "historicalPricings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoricalPricingDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "ean13",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ProductInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "ean13": {
+            "type": "string",
+            "maxLength": 13
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "ean13"
+        ]
+      },
+      "ProductUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "ean13": {
+            "type": "string",
+            "maxLength": 13
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "TagDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productId": {
+            "type": "number"
+          },
+          "departmentId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "price": {
+            "type": "string"
+          },
+          "wholesalePrice": {
+            "type": "string"
+          },
+          "fidelityPrice": {
+            "type": "string"
+          },
+          "stockCount": {
+            "type": "number"
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "harpyLabel": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductDto"
+          },
+          "scannedTags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScannedTagDto"
+            }
+          },
+          "historicalPricings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoricalPricingDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "productId",
+          "departmentId",
+          "name",
+          "price",
+          "wholesalePrice",
+          "fidelityPrice",
+          "stockCount",
+          "expirationDate",
+          "harpyLabel",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "TagInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productId": {
+            "type": "number"
+          },
+          "departmentId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "price": {
+            "type": "string"
+          },
+          "wholesalePrice": {
+            "type": "string"
+          },
+          "fidelityPrice": {
+            "type": "string"
+          },
+          "stockCount": {
+            "type": "number"
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "harpyLabel": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "productId",
+          "departmentId",
+          "name",
+          "price",
+          "expirationDate"
+        ]
+      },
+      "TagUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productId": {
+            "type": "number"
+          },
+          "departmentId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "price": {
+            "type": "string"
+          },
+          "wholesalePrice": {
+            "type": "string"
+          },
+          "fidelityPrice": {
+            "type": "string"
+          },
+          "stockCount": {
+            "type": "number"
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "harpyLabel": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ScannedTagDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tagId": {
+            "type": "number"
+          },
+          "ocrData": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "tagId",
+          "ocrData",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ScannedTagInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tagId": {
+            "type": "number"
+          },
+          "ocrData": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "tagId"
+        ]
+      },
+      "ScannedTagUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tagId": {
+            "type": "number"
+          },
+          "ocrData": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "DepartmentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "managerId": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "storeId",
+          "name",
+          "managerId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "DepartmentInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "managerId": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "storeId",
+          "name",
+          "managerId"
+        ]
+      },
+      "DepartmentUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "storeId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "managerId": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "CreditCardDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clientId": {
+            "type": "number"
+          },
+          "cardholderName": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "clientId",
+          "cardholderName",
+          "expirationDate",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreditCardInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clientId": {
+            "type": "number"
+          },
+          "cardNumber": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "cardholderName": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "cvv": {
+            "type": "string",
+            "maxLength": 5
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cardNumber",
+          "cardholderName",
+          "expirationDate",
+          "cvv"
+        ]
+      },
+      "CreditCardUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clientId": {
+            "type": "number"
+          },
+          "cardNumber": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "cardholderName": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "cvv": {
+            "type": "string",
+            "maxLength": 5
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "HistoricalPricingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productId": {
+            "type": "number"
+          },
+          "tagId": {
+            "type": "number"
+          },
+          "previousPrice": {
+            "type": "string"
+          },
+          "updatedPrice": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "productId",
+          "tagId",
+          "previousPrice",
+          "updatedPrice",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "HistoricalPricingInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productId": {
+            "type": "number"
+          },
+          "tagId": {
+            "type": "number"
+          },
+          "previousPrice": {
+            "type": "string"
+          },
+          "updatedPrice": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "productId",
+          "tagId",
+          "previousPrice",
+          "updatedPrice"
+        ]
+      },
+      "HistoricalPricingUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productId": {
+            "type": "number"
+          },
+          "tagId": {
+            "type": "number"
+          },
+          "previousPrice": {
+            "type": "string"
+          },
+          "updatedPrice": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "suggestion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "code",
+          "message",
+          "path",
+          "suggestion"
+        ]
+      },
+      "AuthInput": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/auth": {
+      "servers": [
+        {
+          "url": "http://localhost:3000/",
+          "description": "development"
+        },
+        {
+          "url": "https://ichigo-api-ff773ad6550c.herokuapp.com/",
+          "description": "production"
+        }
+      ],
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Login failed. Invalid or inexistent user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/address/create": {
+      "post": {
+        "tags": [
+          "address"
+        ],
+        "summary": "Create a new address",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Address created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/address/update": {
+      "post": {
+        "tags": [
+          "address"
+        ],
+        "summary": "Update an existing address",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Address updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/address/delete/{id}": {
+      "post": {
+        "tags": [
+          "address"
+        ],
+        "summary": "Delete an address",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Address deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/address/{id}": {
+      "get": {
+        "tags": [
+          "address"
+        ],
+        "summary": "Get an address by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Address retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/address/store/{storeId}": {
+      "get": {
+        "tags": [
+          "address"
+        ],
+        "summary": "Get addresses by store ID",
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Addresses retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AddressDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not find addresses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/create": {
+      "post": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Create a new client",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Client created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/update": {
+      "post": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Update an existing client",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Client updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/delete/{id}": {
+      "post": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Delete a client",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/{id}": {
+      "get": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Get a client by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/credit-card/create": {
+      "post": {
+        "tags": [
+          "credit-card"
+        ],
+        "summary": "Create a new credit card",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreditCardInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Credit card created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditCardDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create credit card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/credit-card/update": {
+      "post": {
+        "tags": [
+          "credit-card"
+        ],
+        "summary": "Update an existing credit card",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreditCardUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Credit card updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditCardDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update credit card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/credit-card/delete/{id}": {
+      "post": {
+        "tags": [
+          "credit-card"
+        ],
+        "summary": "Delete a credit card",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credit card deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditCardDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete credit card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/credit-card/{id}": {
+      "get": {
+        "tags": [
+          "credit-card"
+        ],
+        "summary": "Get a credit card by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credit card retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditCardDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find credit card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/department/create": {
+      "post": {
+        "tags": [
+          "department"
+        ],
+        "summary": "Create a new department",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Department created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create department",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/department/update": {
+      "post": {
+        "tags": [
+          "department"
+        ],
+        "summary": "Update an existing department",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Department updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update department",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/department/delete/{id}": {
+      "post": {
+        "tags": [
+          "department"
+        ],
+        "summary": "Delete a department",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Department deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete department",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/department/{id}": {
+      "get": {
+        "tags": [
+          "department"
+        ],
+        "summary": "Get a department by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Department retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find department",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/historical-pricing/create": {
+      "post": {
+        "tags": [
+          "historical-pricing"
+        ],
+        "summary": "Create a new historical pricing",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HistoricalPricingInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Historical pricing created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoricalPricingDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create historical pricing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/historical-pricing/update": {
+      "post": {
+        "tags": [
+          "historical-pricing"
+        ],
+        "summary": "Update an existing historical pricing",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HistoricalPricingUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Historical pricing updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoricalPricingDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update historical pricing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/historical-pricing/delete/{id}": {
+      "post": {
+        "tags": [
+          "historical-pricing"
+        ],
+        "summary": "Delete a historical pricing",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Historical pricing deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoricalPricingDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete historical pricing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/historical-pricing/{id}": {
+      "get": {
+        "tags": [
+          "historical-pricing"
+        ],
+        "summary": "Get a historical pricing by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Historical pricing retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoricalPricingDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find historical pricing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/create": {
+      "post": {
+        "tags": [
+          "product"
+        ],
+        "summary": "Create a new product",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/update": {
+      "post": {
+        "tags": [
+          "product"
+        ],
+        "summary": "Update an existing product",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/delete/{id}": {
+      "post": {
+        "tags": [
+          "product"
+        ],
+        "summary": "Delete a product",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "get": {
+        "tags": [
+          "product"
+        ],
+        "summary": "Get a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scanned-tag/create": {
+      "post": {
+        "tags": [
+          "scanned-tag"
+        ],
+        "summary": "Create a new scanned tag",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScannedTagInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scanned tag created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScannedTagDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create scanned tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scanned-tag/update": {
+      "post": {
+        "tags": [
+          "scanned-tag"
+        ],
+        "summary": "Update an existing scanned tag",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScannedTagUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scanned tag updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScannedTagDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update scanned tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scanned-tag/delete/{id}": {
+      "post": {
+        "tags": [
+          "scanned-tag"
+        ],
+        "summary": "Delete a scanned tag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Scanned tag deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScannedTagDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete scanned tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scanned-tag/{id}": {
+      "get": {
+        "tags": [
+          "scanned-tag"
+        ],
+        "summary": "Get a scanned tag by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Scanned tag retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScannedTagDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find scanned tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scanned-tag/tag/{id}": {
+      "get": {
+        "tags": [
+          "scanned-tag"
+        ],
+        "summary": "Get scanned tags by tag ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Scanned tags retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScannedTagDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find scanned tags",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/store/create": {
+      "post": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Create a new store",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Store created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create store",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/store/update": {
+      "post": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Update an existing store",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Store updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update store",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/store/delete/{id}": {
+      "post": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Delete a store",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Store deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete store",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/store/{id}": {
+      "get": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Get a store by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Store retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find store",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/create": {
+      "post": {
+        "tags": [
+          "tag"
+        ],
+        "summary": "Create a new tag",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tag created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/update": {
+      "post": {
+        "tags": [
+          "tag"
+        ],
+        "summary": "Update an existing tag",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tag updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/delete/{id}": {
+      "post": {
+        "tags": [
+          "tag"
+        ],
+        "summary": "Delete a tag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tag deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not delete tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/{id}": {
+      "get": {
+        "tags": [
+          "tag"
+        ],
+        "summary": "Get a tag by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tag retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/by-product/{id}": {
+      "get": {
+        "tags": [
+          "tag"
+        ],
+        "summary": "Get a tag by product EAN or name",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tag retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find tag by product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/create": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not create user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/update": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update an existing user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not update user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
