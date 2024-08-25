@@ -1,28 +1,28 @@
 import {
   pgTable,
-  serial,
+  uuid,
   timestamp,
-  varchar,
 } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
 import { sql } from 'drizzle-orm'
-import userRoleEnum from './enum/user-role.enum'
+import userRoleEnum from './enum/userRole.enum'
 
-const userTable = pgTable('user', {
-  id: serial('id').primaryKey(),
-  name: varchar('name').notNull(),
-  username: varchar('username', { length: 255 }).unique().notNull(),
-  password: varchar('password', { length: 255 }).notNull(),
-  email: varchar('email', { length: 255 }).unique().notNull(),
-  cpf: varchar('cpf', { length: 11 }).unique().notNull(),
-  role: userRoleEnum('user_role').notNull().default('user'),
-  createdAt: timestamp('created_at', {
+const userTable = pgTable('User', {
+  user_id: uuid('user_id')
+    .primaryKey(),
+
+  role: userRoleEnum('role')
+    .notNull()
+    .default('user'),
+
+  created_at: timestamp('created_at', {
     mode: 'string',
   })
     .notNull()
     .defaultNow(),
-  updatedAt: timestamp('updated_at', {
+    
+  updated_at: timestamp('updated_at', {
     mode: 'string',
   })
     .notNull()
@@ -31,13 +31,11 @@ const userTable = pgTable('user', {
 })
 
 const userModelSchema = createSelectSchema(userTable)
-const userDtoSchema = userModelSchema.omit({
-  password: true,
-})
+const userDtoSchema = userModelSchema
 const userInputSchema = createInsertSchema(userTable)
 const userUpdateSchema = userInputSchema
   .partial()
-  .required({ id: true })
+  .required({ user_id: true })
 
 export type UserModel = z.infer<typeof userModelSchema>
 export type UserDto = z.infer<typeof userDtoSchema>
