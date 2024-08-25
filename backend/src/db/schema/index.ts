@@ -10,7 +10,7 @@ import exerciseInfoTable from './exerciseInfo.model'
 import classExerciseTable from './classExercise.model'
 import exerciseCategoryTable from './exerciseCategory.model'
 
-import userRoleEnum from './enum/user-role.enum'
+import userRoleEnum from './enum/userRole.enum'
 
 export {
     userTable, userRoleEnum,
