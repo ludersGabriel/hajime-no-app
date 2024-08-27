@@ -18,6 +18,7 @@ export default async function seed(db: db) {
 
 const usersData: UserInput[] = [
   {
+    user_id: 'e447ab66-ea1c-4b96-8238-f5951ff8c60c',
     
   },
 ]

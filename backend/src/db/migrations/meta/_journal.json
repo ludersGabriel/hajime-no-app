@@ -8,6 +8,13 @@
       "when": 1724624548002,
       "tag": "0000_brief_bedlam",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1724802123894,
+      "tag": "0001_fresh_shadowcat",
+      "breakpoints": true
     }
   ]
 }
