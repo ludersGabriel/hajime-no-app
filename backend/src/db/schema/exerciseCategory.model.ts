@@ -10,7 +10,8 @@ import { sql } from 'drizzle-orm'
 
 const exerciseCategoryTable = pgTable('ExerciseCategory', {
   category_id: uuid('category_id')
-    .primaryKey(),
+    .primaryKey()
+    .defaultRandom(),
 
   name: varchar('name', { length: 100})
     .notNull(),

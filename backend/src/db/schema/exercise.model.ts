@@ -12,7 +12,9 @@ import { sql } from 'drizzle-orm'
 import exerciseCategoryTable from './exerciseCategory.model'
 
 const exerciseTable = pgTable('Exercise', {
-  exercise_id: uuid('exercise_id').primaryKey(),
+  exercise_id: uuid('exercise_id')
+    .primaryKey()
+    .defaultRandom(),
 
   e_category_id: uuid('e_category_id')
     .notNull()

@@ -10,7 +10,8 @@ import userRoleEnum from './enum/userRole.enum'
 
 const userTable = pgTable('User', {
   user_id: uuid('user_id')
-    .primaryKey(),
+    .primaryKey()
+    .defaultRandom(),
 
   role: userRoleEnum('role')
     .notNull()
