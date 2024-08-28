@@ -29,5 +29,6 @@ await seeds.classSeed(db)
 await seeds.checkinSeed(db)
 await seeds.subscriptionSeed(db)
 await seeds.exerciseSeed(db)
+await seeds.exerciseInfoSeed(db)
 
 await connection.end()
