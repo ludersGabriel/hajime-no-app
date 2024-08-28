@@ -10,13 +10,16 @@ import { sql } from 'drizzle-orm'
 
 // Relations
 import userTable from './user.model'
+import classTable from './class.model'
 
 const subscriptionTable = pgTable('Subscription', {
   s_user_id: uuid('s_user_id')
+    .notNull()
     .references(() => userTable.user_id),
 
   s_class_id: uuid('s_class_id')
-    .notNull(),
+    .notNull()
+    .references(() => classTable.class_id),
 
   expiry_date: timestamp('expiry_date', {
     mode: 'string',
