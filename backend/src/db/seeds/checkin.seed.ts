@@ -7,10 +7,10 @@ import checkinTable, {
 export default async function seed(db: db) {
   await db
     .insert(checkinTable)
-    .values(checkinSchemas.input.array().parse(checkinsData))
+    .values(checkinSchemas.input.array().parse(checkinData))
 }
 
-const checkinsData: CheckinInput[] = [
+const checkinData: CheckinInput[] = [
   {
     ci_user_id: '55561080-f8a4-4e54-b8f9-23dcb9477147',
     class_time: '17:30'

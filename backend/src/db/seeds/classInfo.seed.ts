@@ -7,10 +7,10 @@ import classInfoTable, {
 export default async function seed(db: db) {
   await db
     .insert(classInfoTable)
-    .values(classInfoSchemas.input.array().parse(classInfosData))
+    .values(classInfoSchemas.input.array().parse(classInfoData))
 }
 
-const classInfosData: ClassInfoInput[] = [
+const classInfoData: ClassInfoInput[] = [
   {
     ci_class_id: 'f0853cb9-82bf-4f79-a83a-9d13bd3d6c58',
     title: 'Aula de Capoeira',

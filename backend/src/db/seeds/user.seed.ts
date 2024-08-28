@@ -7,10 +7,10 @@ import userTable, {
 export default async function seed(db: db) {
   await db
     .insert(userTable)
-    .values(userSchemas.input.array().parse(usersData))
+    .values(userSchemas.input.array().parse(userData))
 }
 
-const usersData: UserInput[] = [
+const userData: UserInput[] = [
   {user_id: '55561080-f8a4-4e54-b8f9-23dcb9477147', role: 'admin'},
   {user_id: '9b3ee08c-b767-4be8-a8d3-f2e0e3c566bf'}, 
   {user_id: '2490e42f-b829-40a9-ae9c-3a31e86e90ad'},

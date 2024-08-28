@@ -7,10 +7,10 @@ import loginTable, {
 export default async function seed(db: db) {
   await db
     .insert(loginTable)
-    .values(loginSchemas.input.array().parse(loginsData))
+    .values(loginSchemas.input.array().parse(loginData))
 }
 
-const loginsData: LoginInput[] = [
+const loginData: LoginInput[] = [
   {
     username: 'admin',
     password: await Bun.password.hash('123mudar'),

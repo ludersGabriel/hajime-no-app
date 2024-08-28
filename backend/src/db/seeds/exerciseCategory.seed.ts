@@ -7,10 +7,10 @@ import exerciseCategoryTable, {
 export default async function seed(db: db) {
   await db
     .insert(exerciseCategoryTable)
-    .values(exerciseCategorySchemas.input.array().parse(exerciseCategorysData))
+    .values(exerciseCategorySchemas.input.array().parse(exerciseCategoryData))
 }
 
-const exerciseCategorysData: ExerciseCategoryInput[] = [
+const exerciseCategoryData: ExerciseCategoryInput[] = [
   {
     name: 'Boxing',
     category_id: 'dd99ed14-248b-455f-980c-bf4cb18d8b51'

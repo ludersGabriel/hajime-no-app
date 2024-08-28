@@ -7,10 +7,10 @@ import personalInfoTable, {
 export default async function seed(db: db) {
   await db
     .insert(personalInfoTable)
-    .values(personalInfoSchemas.input.array().parse(personalInfosData))
+    .values(personalInfoSchemas.input.array().parse(personalInfoData))
 }
 
-const personalInfosData: PersonalInfoInput[] = [
+const personalInfoData: PersonalInfoInput[] = [
   {
     pi_user_id:  '55561080-f8a4-4e54-b8f9-23dcb9477147',
     name:  'admin',
