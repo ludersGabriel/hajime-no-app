@@ -20,7 +20,7 @@ const personalInfosData: PersonalInfoInput[] = [
   },
   {
     pi_user_id:  '9b3ee08c-b767-4be8-a8d3-f2e0e3c566bf',
-    name:  'Roberto Lucas Santos',
+    name:  'Lorem Ipsum da Silva',
     email: 'robertolucassantos@willianfernandes.com.br',
     phone: '92982532020',
     cpf: '97589908533'

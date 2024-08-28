@@ -24,5 +24,7 @@ for (const table of schema.tables) {
 await seeds.userSeed(db)
 await seeds.personalInfoSeed(db)
 await seeds.loginSeed(db)
+await seeds.exerciseCategorySeed(db)
+await seeds.classSeed(db)
 
 await connection.end()
