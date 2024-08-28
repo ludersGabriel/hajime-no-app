@@ -27,5 +27,6 @@ await seeds.loginSeed(db)
 await seeds.exerciseCategorySeed(db)
 await seeds.classSeed(db)
 await seeds.checkinSeed(db)
+await seeds.subscriptionSeed(db)
 
 await connection.end()

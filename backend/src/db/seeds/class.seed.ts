@@ -7,10 +7,10 @@ import classTable, {
 export default async function seed(db: db) {
   await db
     .insert(classTable)
-    .values(classSchemas.input.array().parse(classsData))
+    .values(classSchemas.input.array().parse(classData))
 }
 
-const classsData: ClassInput[] = [
+const classData: ClassInput[] = [
   {
     class_id: 'f0853cb9-82bf-4f79-a83a-9d13bd3d6c58',
     c_category_id: 'dd99ed14-248b-455f-980c-bf4cb18d8b51'
