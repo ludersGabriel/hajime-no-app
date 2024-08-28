@@ -1,0 +1,1 @@
+ALTER TABLE "Checkin" ALTER COLUMN "class_time" SET DATA TYPE time;
