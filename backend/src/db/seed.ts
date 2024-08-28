@@ -22,5 +22,7 @@ for (const table of schema.tables) {
 }
 
 await seeds.userSeed(db)
+await seeds.personalInfoSeed(db)
+await seeds.loginSeed(db)
 
 await connection.end()

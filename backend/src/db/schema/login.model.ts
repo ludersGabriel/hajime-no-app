@@ -19,6 +19,7 @@ const loginTable = pgTable('Login', {
     .notNull(),
 
   l_user_id: uuid('l_user_id')
+    .notNull()
     .references(() => userTable.user_id),
   
   last_login: timestamp('last_login', {

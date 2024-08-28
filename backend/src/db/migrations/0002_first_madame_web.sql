@@ -1,0 +1,1 @@
+ALTER TABLE "Login" ALTER COLUMN "l_user_id" SET NOT NULL;
