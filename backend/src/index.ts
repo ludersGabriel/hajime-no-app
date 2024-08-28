@@ -8,7 +8,6 @@ import env from './env'
 import type { AuthPayload } from './db/repo/auth.repo'
 import { prettyJSON } from 'hono/pretty-json'
 import { cors } from 'hono/cors'
-import { clientRouter } from './routes/client.route'
 import { swaggerUI } from '@hono/swagger-ui'
 import { serveStatic } from 'hono/bun'
 
@@ -38,7 +37,6 @@ app.get('/', (c) =>
 app
   .basePath(basePath)
   .route('/user', userRouter)
-  .route('/client', clientRouter)
 
 export default app
 export type AppType = typeof app

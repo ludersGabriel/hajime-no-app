@@ -8,6 +8,7 @@ if (!env.DB_SEEDING) {
   throw new Error('You must set DB_SEEDING to "true" when seeding')
 }
 
+// Drop table before seeding
 async function resetTable(db: db, table: Table) {
   return db.execute(
     sql.raw(
@@ -20,7 +21,6 @@ for (const table of schema.tables) {
   await resetTable(db, table)
 }
 
-await seeds.clientSeed(db)
 await seeds.userSeed(db)
 
 await connection.end()
