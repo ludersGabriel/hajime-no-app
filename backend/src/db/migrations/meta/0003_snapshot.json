@@ -1,6 +1,6 @@
 {
-  "id": "5d855fec-1944-4709-bae6-423ca72303ec",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "2003d87e-2414-4403-8267-ea958a5c16b5",
+  "prevId": "2d8124ff-6aa6-4bd9-a9b7-f14eb1a9cabb",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -16,7 +16,7 @@
         },
         "class_time": {
           "name": "class_time",
-          "type": "timestamp",
+          "type": "time",
           "primaryKey": false,
           "notNull": true
         },
@@ -137,7 +137,8 @@
           "name": "class_id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "c_category_id": {
           "name": "c_category_id",
@@ -194,7 +195,8 @@
           "name": "category_id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "name": {
           "name": "name",
@@ -272,7 +274,8 @@
           "name": "exercise_id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "e_category_id": {
           "name": "e_category_id",
@@ -341,7 +344,7 @@
           "name": "l_user_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "last_login": {
           "name": "last_login",
@@ -523,7 +526,8 @@
           "name": "user_id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "role": {
           "name": "role",

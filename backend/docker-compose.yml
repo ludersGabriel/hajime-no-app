@@ -1,17 +1,25 @@
 services:
-  db:
-    image: postgres
+  postgresql-16:
+    image: postgres:16
     restart: always
+
+    container_name: postgresql-16
+    hostname: postgresql-16
+
     environment:
-      POSTGRES_DB: hajime_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
     ports:
-      - '5432:5432'
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+
     networks:
       - hajime_network
+
     volumes:
       - hajime_data:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
 
 volumes:
   hajime_data:

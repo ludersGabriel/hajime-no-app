@@ -8,6 +8,7 @@ if (!env.DB_SEEDING) {
   throw new Error('You must set DB_SEEDING to "true" when seeding')
 }
 
+// Drop table before seeding
 async function resetTable(db: db, table: Table) {
   return db.execute(
     sql.raw(
@@ -20,7 +21,16 @@ for (const table of schema.tables) {
   await resetTable(db, table)
 }
 
-await seeds.clientSeed(db)
 await seeds.userSeed(db)
+await seeds.personalInfoSeed(db)
+await seeds.loginSeed(db)
+await seeds.exerciseCategorySeed(db)
+await seeds.classSeed(db)
+await seeds.checkinSeed(db)
+await seeds.subscriptionSeed(db)
+await seeds.exerciseSeed(db)
+await seeds.exerciseInfoSeed(db)
+await seeds.classExerciseSeed(db)
+
 
 await connection.end()

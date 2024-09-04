@@ -1,6 +1,6 @@
 {
-  "id": "5d855fec-1944-4709-bae6-423ca72303ec",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "27c6692f-8959-4437-9ad8-b1da5ebea44d",
+  "prevId": "5d855fec-1944-4709-bae6-423ca72303ec",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -137,7 +137,8 @@
           "name": "class_id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "c_category_id": {
           "name": "c_category_id",
@@ -194,7 +195,8 @@
           "name": "category_id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "name": {
           "name": "name",
@@ -272,7 +274,8 @@
           "name": "exercise_id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "e_category_id": {
           "name": "e_category_id",
@@ -523,7 +526,8 @@
           "name": "user_id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "role": {
           "name": "role",
