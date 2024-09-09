@@ -1,7 +1,8 @@
 import { z } from 'zod'
-import { userSchemas, type UserModel } from '../schema/user.model'
+import { loginSchemas, type LoginModel } from '../schema/login.model'
+import { userRoleEnumSchema } from '../schema/enum/userRole.enum'
 
-export function hashPassword(pass: UserModel['password']) {
+export function hashPassword(pass: LoginModel['password']) {
   return Bun.password.hashSync(pass, {
     memoryCost: 4,
     timeCost: 3,
@@ -10,27 +11,25 @@ export function hashPassword(pass: UserModel['password']) {
 }
 
 export function verifyPassword(
-  pass: UserModel['password'],
-  hash: UserModel['password']
+  pass: LoginModel['password'],
+  hash: LoginModel['password']
 ) {
   return Bun.password.verifySync(pass, hash)
 }
 
-export const authSchema = userSchemas.model.pick({
+export const authSchema = loginSchemas.model
+  .pick({
+    username: true,
+    l_user_id: true,
+  })
+  .extend({
+    role: userRoleEnumSchema,
+  })
+
+export const authInputSchema = loginSchemas.model.pick({
   username: true,
   password: true,
 })
 
-export const authPayload = userSchemas.model
-  .pick({
-    id: true,
-    username: true,
-    storeId: true,
-  })
-  .extend({
-    clientId: z.number(),
-  })
-
-export type AuthPayload = z.infer<typeof authPayload>
-
-export type AuthInput = z.infer<typeof authSchema>
+export type AuthSchema = z.infer<typeof authSchema>
+export type AuthInput = z.infer<typeof authInputSchema>

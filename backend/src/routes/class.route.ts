@@ -1,32 +1,32 @@
-import { userSchemas } from '@/db/schema/user.model'
-import { UserService } from '@/services/user.service'
-import { Container } from 'typedi'
-import { zValidator } from '@hono/zod-validator'
+import ClassService from '@/services/class.service'
+import Container from 'typedi'
 import { honoWithJwt } from '..'
+import { zValidator } from '@hono/zod-validator'
+import { classSchemas } from '@/db/schema/class.model'
 import { hajimeError, HttpStatus } from '@/services/error.service'
 import { stringParamSchema } from './util'
 
-const service = Container.get(UserService)
+const service = Container.get(ClassService)
 
-export const userRouter = honoWithJwt()
+export const classRouter = honoWithJwt()
   .post(
     '/create',
-    zValidator('json', userSchemas.input),
+    zValidator('json', classSchemas.input),
     async (c) => {
       try {
         const context = await c.get('jwtPayload')
         const input = await c.req.valid('json')
 
-        const user = userSchemas.dto.parse(
+        const classRet = classSchemas.dto.parse(
           await service.create(context, input)
         )
 
-        return c.json({ user })
+        return c.json({ class: classRet })
       } catch {
         return c.json(
           hajimeError({
             status: 'error',
-            message: 'could not create user',
+            message: 'could not create class',
             code: HttpStatus.BAD_REQUEST,
             path: c.req.routePath,
             suggestion: 'check the input and try again',
@@ -38,22 +38,22 @@ export const userRouter = honoWithJwt()
   )
   .post(
     '/update',
-    zValidator('json', userSchemas.update),
+    zValidator('json', classSchemas.update),
     async (c) => {
       try {
         const context = await c.get('jwtPayload')
         const input = await c.req.valid('json')
 
-        const user = userSchemas.dto.parse(
+        const classRet = classSchemas.dto.parse(
           await service.update(context, input)
         )
 
-        return c.json({ user })
+        return c.json({ calss: classRet })
       } catch {
         return c.json(
           hajimeError({
             status: 'error',
-            message: 'could not update user',
+            message: 'could not update class',
             code: HttpStatus.BAD_REQUEST,
             path: c.req.routePath,
             suggestion: 'check the input and try again',
@@ -71,16 +71,16 @@ export const userRouter = honoWithJwt()
         const context = await c.get('jwtPayload')
         const { id } = await c.req.valid('param')
 
-        const user = userSchemas.dto.parse(
+        const classRet = classSchemas.dto.parse(
           await service.delete(context, id)
         )
 
-        return c.json({ user })
+        return c.json({ class: classRet })
       } catch {
         return c.json(
           hajimeError({
             status: 'error',
-            message: 'could not delete user',
+            message: 'could not delete class',
             code: HttpStatus.BAD_REQUEST,
             path: c.req.routePath,
             suggestion: 'check the input and try again',
@@ -95,17 +95,17 @@ export const userRouter = honoWithJwt()
       const context = await c.get('jwtPayload')
       const { id } = await c.req.valid('param')
 
-      const user = userSchemas.dto.parse(
+      const classRet = classSchemas.dto.parse(
         await service.find(context, id)
       )
 
-      return c.json({ user })
+      return c.json({ class: classRet })
     } catch {
       return c.json(
         hajimeError({
           status: 'error',
-          message: 'could not find user',
-          code: HttpStatus.NOT_FOUND,
+          message: 'could not find class',
+          code: HttpStatus.BAD_REQUEST,
           path: c.req.routePath,
           suggestion: 'check the input and try again',
         }),
@@ -116,19 +116,20 @@ export const userRouter = honoWithJwt()
   .get('/', async (c) => {
     try {
       const context = await c.get('jwtPayload')
-      const users = userSchemas.dto
+
+      const classes = classSchemas.dto
         .array()
         .parse(await service.findMany(context))
 
-      return c.json({ users })
+      return c.json({ classes })
     } catch {
       return c.json(
         hajimeError({
           status: 'error',
-          message: 'Not authorized',
-          code: HttpStatus.UNAUTHORIZED,
+          message: 'could not find classes',
+          code: HttpStatus.NOT_FOUND,
           path: c.req.routePath,
-          suggestion: 'Make sure you have the correct role',
+          suggestion: 'check the input and try again',
         }),
         HttpStatus.BAD_REQUEST
       )
