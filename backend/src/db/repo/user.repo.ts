@@ -11,24 +11,6 @@ import { eq } from 'drizzle-orm'
 
 @Service()
 export class UserRepo {
-  async findMany(): Promise<UserModel[]> {
-    return z
-      .array(userSchemas.model)
-      .parse(await db.query.userTable.findMany())
-  }
-
-  async findByUsername(
-    username: UserModel['username']
-  ): Promise<UserModel | null> {
-    const user = await db.query.userTable.findFirst({
-      where: eq(userTable.username, username),
-    })
-
-    if (!user) return null
-
-    return userSchemas.model.parse(user)
-  }
-
   async create(user: UserInput, tx?: db): Promise<UserModel> {
     const repo = tx ?? db
 
@@ -45,29 +27,34 @@ export class UserRepo {
       const [u] = await tx
         .update(userTable)
         .set(user)
-        .where(eq(userTable.id, user.id))
+        .where(eq(userTable.user_id, user.user_id))
         .returning()
 
       return userSchemas.model.parse(u)
     })
   }
 
-  async createMany(
-    users: UserInput[],
-    tx?: db
-  ): Promise<UserModel[]> {
-    const repo = tx ?? db
+  async delete(user_id: UserModel['user_id']): Promise<UserModel> {
+    const [ret] = await db
+      .delete(userTable)
+      .where(eq(userTable.user_id, user_id))
+      .returning()
 
-    return z
-      .array(userSchemas.model)
-      .parse(await repo.insert(userTable).values(users).returning())
+    return userSchemas.model.parse(ret)
   }
 
-  async uploadUsers(users: UserInput[]): Promise<UserModel[]> {
-    return await db.transaction(async (tx) => {
-      return z
-        .array(userSchemas.model)
-        .parse(await tx.insert(userTable).values(users).returning())
-    })
+  async find(user_id: UserModel['user_id']): Promise<UserModel> {
+    const [ret] = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.user_id, user_id))
+
+    return userSchemas.model.parse(ret)
+  }
+
+  async findMany(): Promise<UserModel[]> {
+    return z
+      .array(userSchemas.model)
+      .parse(await db.query.userTable.findMany())
   }
 }

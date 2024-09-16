@@ -1,4 +1,4 @@
-import { authSchema } from '@/db/repo/auth.repo'
+import { authInputSchema } from '@/db/repo/auth.repo'
 import { AuhtService } from '@/services/auth.service'
 import { HttpStatus, hajimeError } from '@/services/error.service'
 import { zValidator } from '@hono/zod-validator'
@@ -9,7 +9,7 @@ const service = Container.get(AuhtService)
 
 export const authRouter = new Hono().post(
   '/',
-  zValidator('json', authSchema),
+  zValidator('json', authInputSchema),
   async (c) => {
     try {
       const input = await c.req.valid('json')
@@ -18,6 +18,8 @@ export const authRouter = new Hono().post(
 
       return c.json({ token })
     } catch (e) {
+      console.log(e)
+
       return c.json(
         hajimeError({
           status: 'error',

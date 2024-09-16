@@ -2,7 +2,7 @@ import {
   pgTable,
   uuid,
   varchar,
-  timestamp
+  timestamp,
 } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
@@ -12,16 +12,14 @@ import { sql } from 'drizzle-orm'
 import userTable from './user.model'
 
 const loginTable = pgTable('Login', {
-  username: varchar('username', { length: 50 })
-    .primaryKey(),
+  username: varchar('username', { length: 50 }).primaryKey(),
 
-  password: varchar('password', { length: 118 })
-    .notNull(),
+  password: varchar('password', { length: 118 }).notNull(),
 
   l_user_id: uuid('l_user_id')
     .notNull()
     .references(() => userTable.user_id),
-  
+
   last_login: timestamp('last_login', {
     mode: 'string',
   })
@@ -43,7 +41,7 @@ const loginTable = pgTable('Login', {
 })
 
 const loginModelSchema = createSelectSchema(loginTable)
-const loginDtoSchema = loginModelSchema
+const loginDtoSchema = loginModelSchema.omit({ password: true })
 const loginInputSchema = createInsertSchema(loginTable)
 const loginUpdateSchema = loginInputSchema
   .partial()

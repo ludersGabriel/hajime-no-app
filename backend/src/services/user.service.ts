@@ -1,5 +1,4 @@
-import type db from '@/db'
-import { hashPassword } from '@/db/repo/auth.repo'
+import type { AuthSchema } from '@/db/repo/auth.repo'
 import { UserRepo } from '@/db/repo/user.repo'
 import {
   type UserInput,
@@ -13,42 +12,60 @@ export class UserService {
   @Inject()
   private readonly repo: UserRepo
 
-  async findMany(): Promise<UserModel[]> {
-    return await this.repo.findMany()
+  //! Need to check about admin checks here and how to handle
+  //! user creation and what not
+  async create(
+    context: AuthSchema,
+    user: UserInput
+  ): Promise<UserModel> {
+    if (context.role !== 'admin') {
+      throw new Error('Unauthorized')
+    }
+
+    return this.repo.create(user)
   }
 
-  async findByUsername(
-    username: UserModel['username']
-  ): Promise<UserModel | null> {
-    return await this.repo.findByUsername(username)
-  }
+  async update(
+    context: AuthSchema,
+    user: UserUpdate
+  ): Promise<UserModel> {
+    if (
+      context.role !== 'admin' &&
+      context.l_user_id !== user.user_id
+    ) {
+      throw new Error('Unauthorized')
+    }
 
-  async create(user: UserInput, tx?: db): Promise<UserModel> {
-    user.password = hashPassword(user.password)
-
-    return this.repo.create(user, tx)
-  }
-
-  async update(user: UserUpdate): Promise<UserModel> {
     return this.repo.update(user)
   }
 
-  async createMany(
-    users: UserInput[],
-    tx?: db
-  ): Promise<UserModel[]> {
-    for (const user of users) {
-      user.password = hashPassword(user.password)
+  async delete(
+    context: AuthSchema,
+    user_id: UserModel['user_id']
+  ): Promise<UserModel> {
+    if (context.role !== 'admin' && context.l_user_id !== user_id) {
+      throw new Error('Unauthorized')
     }
 
-    return this.repo.createMany(users, tx)
+    return this.repo.delete(user_id)
   }
 
-  async uploadUsers(users: UserInput[]): Promise<UserModel[]> {
-    for (const user of users) {
-      user.password = hashPassword(user.password)
+  async find(
+    context: AuthSchema,
+    user_id: UserModel['user_id']
+  ): Promise<UserModel> {
+    if (context.role !== 'admin' && context.l_user_id !== user_id) {
+      throw new Error('Unauthorized')
     }
 
-    return this.repo.uploadUsers(users)
+    return this.repo.find(user_id)
+  }
+
+  async findMany(context: AuthSchema): Promise<UserModel[]> {
+    if (context.role !== 'admin') {
+      throw new Error('Unauthorized')
+    }
+
+    return this.repo.findMany()
   }
 }
