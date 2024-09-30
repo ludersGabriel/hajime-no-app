@@ -43,7 +43,9 @@ export class UserRepo {
     return userSchemas.model.parse(ret)
   }
 
-  async find(user_id: UserModel['user_id']): Promise<UserModel> {
+  async find(
+    user_id: UserModel['user_id']
+  ): Promise<UserModel | undefined> {
     const [ret] = await db
       .select()
       .from(userTable)

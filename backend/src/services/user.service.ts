@@ -53,12 +53,16 @@ export class UserService {
   async find(
     context: AuthSchema,
     user_id: UserModel['user_id']
-  ): Promise<UserModel> {
+  ): Promise<UserModel | undefined> {
     if (context.role !== 'admin' && context.l_user_id !== user_id) {
       throw new Error('Unauthorized')
     }
 
     return this.repo.find(user_id)
+  }
+
+  async me(context: AuthSchema): Promise<UserModel | undefined> {
+    return this.repo.find(context.l_user_id)
   }
 
   async findMany(context: AuthSchema): Promise<UserModel[]> {
@@ -67,5 +71,11 @@ export class UserService {
     }
 
     return this.repo.findMany()
+  }
+
+  async authFind(
+    user_id: UserModel['user_id']
+  ): Promise<UserModel | undefined> {
+    return this.repo.find(user_id)
   }
 }

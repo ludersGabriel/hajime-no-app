@@ -16,7 +16,7 @@ export const authRouter = new Hono().post(
 
       const token = await service.login(input)
 
-      return c.json({ token })
+      return c.json({ token }, HttpStatus.OK)
     } catch (e) {
       console.log(e)
 

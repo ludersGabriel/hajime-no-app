@@ -116,11 +116,9 @@ export const userRouter = honoWithJwt()
   .get('/', async (c) => {
     try {
       const context = await c.get('jwtPayload')
-      const users = userSchemas.dto
-        .array()
-        .parse(await service.findMany(context))
+      const user = userSchemas.dto.parse(await service.me(context))
 
-      return c.json({ users })
+      return c.json({ user })
     } catch {
       return c.json(
         hajimeError({

@@ -18,7 +18,6 @@ export class AuhtService {
   @Inject()
   private readonly loginService: LoginService
 
-  // ! Use join insted of 2 finds
   async login(input: AuthInput): Promise<string> {
     const loginInfo = await this.loginService.find(input.username)
 
@@ -27,7 +26,7 @@ export class AuhtService {
     if (!verifyPassword(input.password, loginInfo.password))
       throw new Error('Wrong password')
 
-    const user = await this.userService.find(loginInfo.l_user_id)
+    const user = await this.userService.authFind(loginInfo.l_user_id)
 
     if (!user) throw new Error('User not found')
 

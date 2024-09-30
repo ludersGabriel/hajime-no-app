@@ -1,0 +1,7 @@
+{
+  "name": "hajime-monorepo",
+  "workspaces": [
+    "./backend",
+    "./frontend"
+  ]
+}
