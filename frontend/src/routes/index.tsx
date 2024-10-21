@@ -49,8 +49,6 @@ function Home() {
   })
 
   const onSubmit = (formData: AuthInput) => {
-    console.log('formData', formData)
-
     login.mutate(formData, {
       onSuccess: (data) => {
         flushSync(() => {

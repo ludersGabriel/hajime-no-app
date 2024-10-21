@@ -1,5 +1,5 @@
 {
-  "name": "hajime-monorepo",
+  "name": "corax-monorepo",
   "workspaces": [
     "./backend",
     "./frontend"
