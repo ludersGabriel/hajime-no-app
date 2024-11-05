@@ -11,7 +11,7 @@ import {
 import LoginService from './login.service'
 
 @Service()
-export class AuhtService {
+export class AuthService {
   @Inject()
   private readonly userService: UserService
 

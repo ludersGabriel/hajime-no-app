@@ -18,11 +18,42 @@ services:
       - hajime_network
 
     volumes:
-      - hajime_data:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
+      - hajime_data-postgres:/var/lib/postgresql/data
+
+  minio-storage: 
+    image: quay.io/minio/minio:RELEASE.2024-10-29T16-01-48Z
+    restart: always
+
+    container_name: minio-storage
+    hostname: minio-storage
+
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+
+    command: server --console-address ":${MINIO_CONSOLE_PORT}" /data
+
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+    ports:
+      - ${MINIO_PORT}:${MINIO_PORT}
+      - ${MINIO_CONSOLE_PORT}:${MINIO_CONSOLE_PORT}
+
+    networks:
+      - hajime_network
+
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - hajime_data-minio:/data
 
 volumes:
-  hajime_data:
+  hajime_data-minio:
+  hajime_data-postgres:
 
 networks:
   hajime_network:

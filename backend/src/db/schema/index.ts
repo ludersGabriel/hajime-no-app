@@ -9,6 +9,7 @@ import exerciseTable from './exercise.model'
 import exerciseInfoTable from './exerciseInfo.model'
 import classExerciseTable from './classExercise.model'
 import exerciseCategoryTable from './exerciseCategory.model'
+import contentTable from './content.model'
 
 import userRoleEnum from './enum/userRole.enum'
 
@@ -23,7 +24,8 @@ export {
     exerciseTable,
     exerciseInfoTable,
     classExerciseTable,
-    exerciseCategoryTable
+    exerciseCategoryTable,
+    contentTable
 }
 
 export const tables = [
@@ -37,5 +39,6 @@ export const tables = [
     exerciseTable,
     exerciseInfoTable,
     classExerciseTable,
-    exerciseCategoryTable
+    exerciseCategoryTable,
+    contentTable
 ]
