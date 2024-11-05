@@ -6,34 +6,37 @@
    https://docs.docker.com/engine/install/ubuntu/
 
 2. Install bun
-  https://bun.sh/docs/installation
+   https://bun.sh/docs/installation
 
 3. To install dependencies:
+
    ```sh
     bun install
     cp .env.example .env
    ```
 
 4. Get the container up and running:
+
    ```sh
     docker compose up
    ```
 
 5. set dev db
+
    ```
     bun db:migrate
     bun db:seed
    ```
 
 6. Run dev server:
+
    ```sh
     bun run dev
    ```
 
 7. open http://localhost:3000
 
-8. simple test: http://localhost:3000/api/v1/client/1 
-
+8. simple test: http://localhost:3000/api/v1/client/1
 
 ## Database Schema
 

@@ -2,7 +2,9 @@ import { AppType } from '@server/index'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { hc } from 'hono/client'
 
-const client = hc<AppType>('/server')
+const url = import.meta.env.VITE_API
+
+const client = hc<AppType>(`${url ? url : 'http://localhost:3000'}`)
 const api = client.api.v1
 
 export { api, client }

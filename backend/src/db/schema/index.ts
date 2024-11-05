@@ -9,33 +9,39 @@ import exerciseTable from './exercise.model'
 import exerciseInfoTable from './exerciseInfo.model'
 import classExerciseTable from './classExercise.model'
 import exerciseCategoryTable from './exerciseCategory.model'
+import contentTable from './content.model'
 
 import userRoleEnum from './enum/userRole.enum'
+import fileFormatEnum from './enum/fileFormat.enum'
 
 export {
-    userTable, userRoleEnum,
-    personalInfoTable,
-    checkinTable,
-    loginTable,
-    subscriptionTable,
-    classTable,
-    classInfoTable,
-    exerciseTable,
-    exerciseInfoTable,
-    classExerciseTable,
-    exerciseCategoryTable
+  userTable,
+  userRoleEnum,
+  fileFormatEnum,
+  personalInfoTable,
+  checkinTable,
+  loginTable,
+  subscriptionTable,
+  classTable,
+  classInfoTable,
+  exerciseTable,
+  exerciseInfoTable,
+  classExerciseTable,
+  exerciseCategoryTable,
+  contentTable,
 }
 
 export const tables = [
-    userTable,
-    personalInfoTable,
-    checkinTable,
-    loginTable,
-    subscriptionTable,
-    classTable,
-    classInfoTable,
-    exerciseTable,
-    exerciseInfoTable,
-    classExerciseTable,
-    exerciseCategoryTable
+  userTable,
+  personalInfoTable,
+  checkinTable,
+  loginTable,
+  subscriptionTable,
+  classTable,
+  classInfoTable,
+  exerciseTable,
+  exerciseInfoTable,
+  classExerciseTable,
+  exerciseCategoryTable,
+  contentTable,
 ]

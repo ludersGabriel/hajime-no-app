@@ -1,33 +1,37 @@
+import 'reflect-metadata'
+import env from './env'
+
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
 
 import { userRouter } from './routes/user.routes'
-// import { authRouter } from './routes/auth.route'
-// import { jwt } from 'hono/jwt'
-import env from './env'
 import type { AuthSchema } from './db/repo/auth.repo'
 import { prettyJSON } from 'hono/pretty-json'
 import { cors } from 'hono/cors'
 import { authRouter } from './routes/auth.route'
 import { jwt } from 'hono/jwt'
+import { contentRouter } from './routes/content.route'
 
 const basePath = '/api/v1'
 const app = new Hono()
   .use('*', logger())
   .use('*', prettyJSON())
   .use('*', cors())
-  .use(
-    `${basePath}/*`,
-    jwt({
+  .use(`${basePath}/*`, (c, next) => {
+    if (c.req.path.startsWith(`${basePath}/auth`)) {
+      return next()
+    }
+    return jwt({
       secret: env.APP_SECRET,
-    })
-  )
+    })(c, next)
+  })
   .get('/', (c) =>
     c.json({ message: `core api running on ${basePath}` })
   )
-  .route('/auth', authRouter)
   .basePath(basePath)
+  .route('/auth', authRouter)
   .route('/user', userRouter)
+  .route('/content', contentRouter)
 
 export default app
 export type AppType = typeof app

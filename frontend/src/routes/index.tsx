@@ -1,17 +1,17 @@
-import { useIndexQuery } from '@client/api'
 import { useLogin } from '@client/api/auth/auth.mutation'
 import { userQueryOptions } from '@client/api/user/user.query'
 import { useAuth } from '@client/auth'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { AuthInput, authInputSchema } from '@server/db/repo/auth.repo'
-import {
-  createFileRoute,
-  redirect,
-  useNavigate,
-} from '@tanstack/react-router'
+import PanelaButton from '@client/components/PanelaButton'
+import PanelaInput from '@client/components/PanelaInput'
+import { AuthInput } from '@server/db/repo/auth.repo'
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
+import { useState } from 'react'
 import { flushSync } from 'react-dom'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+
+import Logo from '../assets/logo.png'
+import ScreenContainer from '@client/components/ScreenContainer'
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -35,13 +35,12 @@ export const Route = createFileRoute('/')({
 })
 
 function Home() {
-  const { data } = useIndexQuery()
   const login = useLogin()
+  const [loading, setLoading] = useState(false)
   const auth = useAuth()
   const navigate = useNavigate()
 
   const form = useForm<AuthInput>({
-    resolver: zodResolver(authInputSchema),
     defaultValues: {
       password: '',
       username: '',
@@ -49,6 +48,9 @@ function Home() {
   })
 
   const onSubmit = (formData: AuthInput) => {
+    if (loading) return
+
+    setLoading(true)
     login.mutate(formData, {
       onSuccess: (data) => {
         flushSync(() => {
@@ -61,35 +63,62 @@ function Home() {
 
         navigate({ to: '/dashboard' })
       },
+      onError: () => {
+        toast.error('Login failed')
+      },
+      onSettled: () => {
+        setLoading(false)
+      },
     })
   }
 
   return (
-    <div className='w-full h-full flex flex-col items-center justify-center p-3'>
-      <p>backend: {data?.message}</p>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <input
-          className='mb-2 rounded w-full p-2'
-          {...form.register('username', {
-            required: true,
-          })}
-          placeholder='Username'
-        />
+    <ScreenContainer noHeader>
+      <div className='flex flex-col gap-5'>
+        <div className='flex flex-col items-center mb-10'>
+          <img
+            src={Logo}
+            alt='Logo'
+            style={{
+              width: '300px',
+              height: '300px',
+            }}
+          />
+          <h2>Bem vindo ao Panelapp!</h2>
+          <h4>Junte-se aos seus amigos</h4>
+          <h4>nessa jornada!</h4>
+        </div>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className='flex flex-col gap-5'>
+            <PanelaInput
+              {...form.register('username', {
+                required: {
+                  value: true,
+                  message: 'Username is required',
+                },
+              })}
+              placeholder='Usuário'
+              label='Usuário'
+              error={form.formState.errors.username?.message}
+            />
 
-        <input
-          className='mb-2 rounded w-full p-2'
-          {...form.register('password', { required: true })}
-          placeholder='Password'
-          type='password'
-        />
+            <PanelaInput
+              {...form.register('password', {
+                required: {
+                  value: true,
+                  message: 'Password is required',
+                },
+              })}
+              type='password'
+              placeholder='Senha'
+              label='Senha'
+              error={form.formState.errors.password?.message}
+            />
 
-        <button
-          type='submit'
-          className='rounded bg-blue-500 text-white p-2 w-full'
-        >
-          Login
-        </button>
-      </form>
-    </div>
+            <PanelaButton type='submit'>Login</PanelaButton>
+          </div>
+        </form>
+      </div>
+    </ScreenContainer>
   )
 }

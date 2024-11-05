@@ -1,11 +1,11 @@
 import { authInputSchema } from '@/db/repo/auth.repo'
-import { AuhtService } from '@/services/auth.service'
+import { AuthService } from '@/services/auth.service'
 import { HttpStatus, hajimeError } from '@/services/error.service'
 import { zValidator } from '@hono/zod-validator'
 import { Hono } from 'hono'
 import Container from 'typedi'
 
-const service = Container.get(AuhtService)
+const service = Container.get(AuthService)
 
 export const authRouter = new Hono().post(
   '/',

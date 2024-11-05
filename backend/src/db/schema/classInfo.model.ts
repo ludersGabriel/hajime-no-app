@@ -2,7 +2,7 @@ import {
   pgTable,
   uuid,
   timestamp,
-  varchar
+  varchar,
 } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
@@ -15,15 +15,15 @@ const classInfoTable = pgTable('Class', {
     .primaryKey()
     .references(() => classTable.class_id),
 
-  title: varchar('title', { length: 100}),
-  description: varchar('description', { length: 500}),
+  title: varchar('title', { length: 100 }),
+  description: varchar('description', { length: 500 }),
 
   created_at: timestamp('created_at', {
     mode: 'string',
   })
     .notNull()
     .defaultNow(),
-    
+
   updated_at: timestamp('updated_at', {
     mode: 'string',
   })

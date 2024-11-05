@@ -16,6 +16,15 @@ const EnvSchema = z.object({
   DB_MIGRATING: stringBoolean,
   DB_SEEDING: stringBoolean,
   APP_SECRET: z.string(),
+
+  S3_REGION: z.string(),
+  S3_ADDRESS: z.string(),
+  S3_ACCESSKEY_USER: z.string(),
+  S3_ACCESSKEY_PASS: z.string(),
+  S3_BUCKET: z.string(),
+
+  MINIO_ADDRESS: z.string(),
+  MINIO_PORT: z.coerce.number(),
 })
 
 export type EnvSchema = z.infer<typeof EnvSchema>

@@ -32,5 +32,4 @@ await seeds.exerciseSeed(db)
 await seeds.exerciseInfoSeed(db)
 await seeds.classExerciseSeed(db)
 
-
 await connection.end()
