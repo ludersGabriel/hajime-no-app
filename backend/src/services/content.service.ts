@@ -146,3 +146,60 @@ const deleteDocument = async (docId: string): Promise<void> => {
 };
 
 export { createDocument, deleteDocument, readDocument };
+
+
+// import { S3Client } from '@aws-sdk/client-s3'
+// import { Upload } from '@aws-sdk/lib-storage';
+// import { v4 } from 'uuid';
+
+
+// // Creates client to access S3
+// const client = new S3Client({
+//   region: "REGION",
+//   forcePathStyle: true,
+//   endpoint: 'http://localhost:9000',
+//   credentials: {
+//     accessKeyId: "minioadmin",
+//     secretAccessKey: "minioadmin",
+//   },
+// });
+
+// const docId = v4();
+
+// async function uploadStream(Bucket: string, Key: string, readableStream: ReadableStream) {
+
+//   let res;
+
+//   // Creates an upload task
+//   const parallelUploads3 = new Upload({
+//     client,
+//     params: {
+//       Bucket,
+//       Key,
+//       Body: readableStream,
+//       ACL:'public-read',
+//     },
+//     queueSize: 4,
+//     partSize: 1024 * 1024 * 5,
+//     leavePartsOnError: true,
+//   });
+
+//   // Awaits for task end
+//   res = await parallelUploads3.done();
+
+//   console.log(res);
+//   return res;
+// }
+
+// const textstream = new ReadableStream({
+//   start(controller) {
+//     controller.enqueue("hello ");
+//     controller.enqueue("world ");
+//     controller.enqueue(docId);
+
+//     // Always close the stream, otherwise S3 wont assemble the file
+//     controller.close()
+//   }
+// });
+
+// uploadStream('datalake', docId, textstream)
