@@ -39,6 +39,10 @@ import {
   const contentModelSchema = createSelectSchema(contentTable)
   const contentDtoSchema = contentModelSchema
   const contentInputSchema = createInsertSchema(contentTable)
+    // .extend({
+    //   file: z.instanceof(Stream)
+    // })
+
   const contentUpdateSchema = contentInputSchema
     .partial()
     .required({ content_id: true })

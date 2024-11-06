@@ -1,32 +1,32 @@
-import ContentService from '@/services/class.service'
+import ContentService from '@/services/content.service'
 import Container from 'typedi'
 import { honoWithJwt } from '..'
 import { zValidator } from '@hono/zod-validator'
-import { classSchemas } from '@/db/schema/class.model'
+import { contentSchemas } from '@/db/schema/content.model'
 import { hajimeError, HttpStatus } from '@/services/error.service'
 import { stringParamSchema } from './util'
 
 const service = Container.get(ContentService)
 
-export const classRouter = honoWithJwt()
+export const contentRouter = honoWithJwt()
   .post(
     '/create',
-    zValidator('json', classSchemas.input),
+    zValidator('json', contentSchemas.input),
     async (c) => {
       try {
         const context = await c.get('jwtPayload')
         const input = await c.req.valid('json')
 
-        const classRet = classSchemas.dto.parse(
+        const contentRet = contentSchemas.dto.parse(
           await service.create(context, input)
         )
 
-        return c.json({ class: classRet })
+        return c.json({ class: contentRet })
       } catch {
         return c.json(
           hajimeError({
             status: 'error',
-            message: 'could not create class',
+            message: 'could not create content',
             code: HttpStatus.BAD_REQUEST,
             path: c.req.routePath,
             suggestion: 'check the input and try again',
@@ -38,22 +38,22 @@ export const classRouter = honoWithJwt()
   )
   .post(
     '/update',
-    zValidator('json', classSchemas.update),
+    zValidator('json', contentSchemas.update),
     async (c) => {
       try {
         const context = await c.get('jwtPayload')
         const input = await c.req.valid('json')
 
-        const classRet = classSchemas.dto.parse(
+        const contentRet = contentSchemas.dto.parse(
           await service.update(context, input)
         )
 
-        return c.json({ calss: classRet })
+        return c.json({ calss: contentRet })
       } catch {
         return c.json(
           hajimeError({
             status: 'error',
-            message: 'could not update class',
+            message: 'could not update content',
             code: HttpStatus.BAD_REQUEST,
             path: c.req.routePath,
             suggestion: 'check the input and try again',
@@ -71,16 +71,16 @@ export const classRouter = honoWithJwt()
         const context = await c.get('jwtPayload')
         const { id } = await c.req.valid('param')
 
-        const classRet = classSchemas.dto.parse(
+        const contentRet = contentSchemas.dto.parse(
           await service.delete(context, id)
         )
 
-        return c.json({ class: classRet })
+        return c.json({ class: contentRet })
       } catch {
         return c.json(
           hajimeError({
             status: 'error',
-            message: 'could not delete class',
+            message: 'could not delete content',
             code: HttpStatus.BAD_REQUEST,
             path: c.req.routePath,
             suggestion: 'check the input and try again',
@@ -95,16 +95,16 @@ export const classRouter = honoWithJwt()
       const context = await c.get('jwtPayload')
       const { id } = await c.req.valid('param')
 
-      const classRet = classSchemas.dto.parse(
+      const contentRet = contentSchemas.dto.parse(
         await service.find(context, id)
       )
 
-      return c.json({ class: classRet })
+      return c.json({ class: contentRet })
     } catch {
       return c.json(
         hajimeError({
           status: 'error',
-          message: 'could not find class',
+          message: 'could not find content',
           code: HttpStatus.BAD_REQUEST,
           path: c.req.routePath,
           suggestion: 'check the input and try again',
@@ -113,4 +113,3 @@ export const classRouter = honoWithJwt()
       )
     }
   })
-
