@@ -7,11 +7,12 @@
     "db:seed": "cross-env DB_SEEDING=true bun run src/db/seed.ts",
     "db:studio": "drizzle-kit studio",
     "route:test": "bun db:seed && bun test",
-    "build": "bun --target bun build ./src/index.ts --outdir ./build",
-    "start": "bun build/index.js"
+    "build": "bun --target bun build ./src/index.ts --outdir ./build && cp .env ./build/.env",
+    "start": "bun build/index.js",
+    "lint": "bun eslint . && bun prettier --check .",
+    "lint:fix": "bun eslint . --fix && bun prettier --write ."
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.685.0",
     "@hono/swagger-ui": "^0.4.0",
     "@hono/zod-validator": "^0.2.2",
     "csv-simple-parser": "^1.0.3",

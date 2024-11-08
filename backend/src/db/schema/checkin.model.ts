@@ -1,9 +1,4 @@
-import {
-  pgTable,
-  uuid,
-  timestamp,
-  time
-} from 'drizzle-orm/pg-core'
+import { pgTable, uuid, timestamp, time } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
 
@@ -15,8 +10,7 @@ const checkinTable = pgTable('Checkin', {
     .notNull()
     .references(() => userTable.user_id),
 
-  class_time: time('class_time')
-    .notNull(),
+  class_time: time('class_time').notNull(),
 
   created_at: timestamp('created_at', {
     mode: 'string',

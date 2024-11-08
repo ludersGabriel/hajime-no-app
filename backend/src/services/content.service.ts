@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { AuthSchema } from '@/db/repo/auth.repo'
 import ContentRepo from '@/db/repo/content.repo'
 import type {
@@ -57,15 +58,14 @@ export default class ContentService {
   }
 }
 
-
 import {
   DeleteObjectCommand,
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
-  S3
-} from '@aws-sdk/client-s3';
-import { v4 } from 'uuid';
+  S3,
+} from '@aws-sdk/client-s3'
+import { v4 } from 'uuid'
 import env from '@/env'
 
 // This is the client we will use to deal with our S3 like service
@@ -77,38 +77,35 @@ const s3 = new S3({
     accessKeyId: env.S3_ACCESS_KEY_ID as string,
     secretAccessKey: env.S3_ACCESS_KEY_SECRET as string,
   },
-});
-
+})
 
 // This function will upload our document to the storage on a specific bucket
-// and returns the id of the file on the S3 
+// and returns the id of the file on the S3
 // (if you want to keep a track on them)
-const createDocument = async (
-  file: File,
-): Promise<string> => {
-  // Create a specific uuid v4 to assign on the document on the s3 :) 
-  const docId = v4();
+const createDocument = async (file: File): Promise<string> => {
+  // Create a specific uuid v4 to assign on the document on the s3 :)
+  const docId = v4()
 
   const stream = new ReadableStream({
     start(controller) {
-      controller.enqueue("hello");
-      controller.enqueue("world");
-      controller.close();
+      controller.enqueue('hello')
+      controller.enqueue('world')
+      controller.close()
     },
-  });
+  })
 
   const params = {
     Bucket: env.S3_BUCKET as string,
     Key: docId,
     Body: stream,
     ContentType: file.type,
-  };
+  }
 
   // Upload file to S3
   const uploadCommand = await s3.putObject(params)
 
-  return docId;
-};
+  return docId
+}
 
 // This function will fetch the document data on the S3 given an ID and
 // return a byte array (file content) with a content type
@@ -116,42 +113,40 @@ const createDocument = async (
 const readDocument = async (
   docId: string
 ): Promise<{
-  data: Uint8Array;
-  contentType: string;
+  data: Uint8Array
+  contentType: string
 }> => {
   const readCommand = new GetObjectCommand({
     Bucket: env.S3_BUCKET as string,
     Key: docId,
-  });
-  const object = await s3.send(readCommand);
-  const byteArray = await object.Body?.transformToByteArray();
+  })
+  const object = await s3.send(readCommand)
+  const byteArray = await object.Body?.transformToByteArray()
   if (byteArray === undefined) {
-    throw new Error('File does not exist');
+    throw new Error('File does not exist')
   }
 
   return {
     data: byteArray,
     contentType: object.ContentType ?? 'application/octet-stream',
-  };
-};
+  }
+}
 
 // This function will delete the file on S3 given an ID
 const deleteDocument = async (docId: string): Promise<void> => {
   const deleteCommand = new DeleteObjectCommand({
     Bucket: env.S3_BUCKET as string,
     Key: docId,
-  });
+  })
 
-  await s3.send(deleteCommand);
-};
+  await s3.send(deleteCommand)
+}
 
-export { createDocument, deleteDocument, readDocument };
-
+export { createDocument, deleteDocument, readDocument }
 
 // import { S3Client } from '@aws-sdk/client-s3'
 // import { Upload } from '@aws-sdk/lib-storage';
 // import { v4 } from 'uuid';
-
 
 // // Creates client to access S3
 // const client = new S3Client({

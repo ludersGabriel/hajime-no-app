@@ -5,7 +5,6 @@ import {
 } from '@tanstack/react-router'
 
 import { QueryClient } from '@tanstack/react-query'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 interface RouterContext {
   queryClient: QueryClient
@@ -19,10 +18,12 @@ function RootComponent() {
   return (
     <>
       <Outlet />
-      <TanStackRouterDevtools
-        position='bottom-right'
-        initialIsOpen={false}
-      />
+      {/* {import.meta.env.MODE === 'development' && (
+        <TanStackRouterDevtools
+          position='top-right'
+          initialIsOpen={false}
+        />
+      )} */}
     </>
   )
 }

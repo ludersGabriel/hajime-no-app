@@ -34,12 +34,8 @@
           "name": "Checkin_ci_user_id_User_user_id_fk",
           "tableFrom": "Checkin",
           "tableTo": "User",
-          "columnsFrom": [
-            "ci_user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["ci_user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -103,12 +99,8 @@
           "name": "ClassExercise_ce_class_id_Class_class_id_fk",
           "tableFrom": "ClassExercise",
           "tableTo": "Class",
-          "columnsFrom": [
-            "ce_class_id"
-          ],
-          "columnsTo": [
-            "class_id"
-          ],
+          "columnsFrom": ["ce_class_id"],
+          "columnsTo": ["class_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -116,12 +108,8 @@
           "name": "ClassExercise_ce_exercise_id_Exercise_exercise_id_fk",
           "tableFrom": "ClassExercise",
           "tableTo": "Exercise",
-          "columnsFrom": [
-            "ce_exercise_id"
-          ],
-          "columnsTo": [
-            "exercise_id"
-          ],
+          "columnsFrom": ["ce_exercise_id"],
+          "columnsTo": ["exercise_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -129,10 +117,7 @@
       "compositePrimaryKeys": {
         "ClassExercise_ce_class_id_ce_exercise_id_pk": {
           "name": "ClassExercise_ce_class_id_ce_exercise_id_pk",
-          "columns": [
-            "ce_class_id",
-            "ce_exercise_id"
-          ]
+          "columns": ["ce_class_id", "ce_exercise_id"]
         }
       },
       "uniqueConstraints": {}
@@ -182,12 +167,8 @@
           "name": "Class_c_category_id_ExerciseCategory_category_id_fk",
           "tableFrom": "Class",
           "tableTo": "ExerciseCategory",
-          "columnsFrom": [
-            "c_category_id"
-          ],
-          "columnsTo": [
-            "category_id"
-          ],
+          "columnsFrom": ["c_category_id"],
+          "columnsTo": ["category_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -369,12 +350,8 @@
           "name": "Exercise_e_category_id_ExerciseCategory_category_id_fk",
           "tableFrom": "Exercise",
           "tableTo": "ExerciseCategory",
-          "columnsFrom": [
-            "e_category_id"
-          ],
-          "columnsTo": [
-            "category_id"
-          ],
+          "columnsFrom": ["e_category_id"],
+          "columnsTo": ["category_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -432,12 +409,8 @@
           "name": "Login_l_user_id_User_user_id_fk",
           "tableFrom": "Login",
           "tableTo": "User",
-          "columnsFrom": [
-            "l_user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["l_user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -500,12 +473,8 @@
           "name": "PersonalInfo_pi_user_id_User_user_id_fk",
           "tableFrom": "PersonalInfo",
           "tableTo": "User",
-          "columnsFrom": [
-            "pi_user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["pi_user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -515,16 +484,12 @@
         "PersonalInfo_cpf_unique": {
           "name": "PersonalInfo_cpf_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "cpf"
-          ]
+          "columns": ["cpf"]
         },
         "PersonalInfo_email_unique": {
           "name": "PersonalInfo_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       }
     },
@@ -578,12 +543,8 @@
           "name": "Subscription_s_user_id_User_user_id_fk",
           "tableFrom": "Subscription",
           "tableTo": "User",
-          "columnsFrom": [
-            "s_user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["s_user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -591,12 +552,8 @@
           "name": "Subscription_s_class_id_Class_class_id_fk",
           "tableFrom": "Subscription",
           "tableTo": "Class",
-          "columnsFrom": [
-            "s_class_id"
-          ],
-          "columnsTo": [
-            "class_id"
-          ],
+          "columnsFrom": ["s_class_id"],
+          "columnsTo": ["class_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -648,10 +605,7 @@
     "public.UserRoleEnum": {
       "name": "UserRoleEnum",
       "schema": "public",
-      "values": [
-        "admin",
-        "user"
-      ]
+      "values": ["admin", "user"]
     }
   },
   "schemas": {},

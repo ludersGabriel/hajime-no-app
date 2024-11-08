@@ -20,7 +20,7 @@ const EnvSchema = z.object({
   S3_URL: z.string(),
   S3_ACCESS_KEY_ID: z.string(),
   S3_ACCESS_KEY_SECRET: z.string(),
-  S3_BUCKET: z.string()
+  S3_BUCKET: z.string(),
 })
 
 export type EnvSchema = z.infer<typeof EnvSchema>

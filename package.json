@@ -1,7 +1,13 @@
 {
-  "name": "corax-monorepo",
+  "name": "panela-monorepo",
   "workspaces": [
     "./backend",
     "./frontend"
-  ]
+  ],
+  "devDependencies": {
+    "husky": "^9.1.6"
+  },
+  "scripts": {
+    "prepare": "husky"
+  }
 }

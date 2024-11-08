@@ -70,5 +70,5 @@ const subscriptionData: SubscriptionInput[] = [
     s_user_id: 'c768cbaf-4776-444e-8a58-61609544a333',
     s_class_id: '390295a2-7640-4a82-9ef8-e5d7789b2cb8',
     expiry_date: '2024-10-05 00:00:00',
-  }
+  },
 ]

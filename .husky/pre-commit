@@ -1,0 +1,5 @@
+cd frontend
+bun lint
+cd ../backend
+bun lint
+cd ..

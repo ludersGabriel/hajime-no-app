@@ -2,7 +2,7 @@ import {
   pgTable,
   uuid,
   timestamp,
-  boolean
+  boolean,
 } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
@@ -12,9 +12,7 @@ import { sql } from 'drizzle-orm'
 import exerciseCategoryTable from './exerciseCategory.model'
 
 const exerciseTable = pgTable('Exercise', {
-  exercise_id: uuid('exercise_id')
-    .primaryKey()
-    .defaultRandom(),
+  exercise_id: uuid('exercise_id').primaryKey().defaultRandom(),
 
   e_category_id: uuid('e_category_id')
     .notNull()
@@ -27,7 +25,7 @@ const exerciseTable = pgTable('Exercise', {
   })
     .notNull()
     .defaultNow(),
-    
+
   updated_at: timestamp('updated_at', {
     mode: 'string',
   })
@@ -35,9 +33,7 @@ const exerciseTable = pgTable('Exercise', {
     .defaultNow()
     .$onUpdate(() => sql`current_timestamp`),
 
-  active: boolean('active')
-    .notNull()
-    .default(true)
+  active: boolean('active').notNull().default(true),
 })
 
 const exerciseModelSchema = createSelectSchema(exerciseTable)

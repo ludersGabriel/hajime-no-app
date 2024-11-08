@@ -29,7 +29,9 @@ export default class ContentRepo {
     return ret
   }
 
-  async delete(id: ContentModel['content_id']): Promise<ContentModel> {
+  async delete(
+    id: ContentModel['content_id']
+  ): Promise<ContentModel> {
     const [ret] = await db
       .delete(contentTable)
       .where(eq(contentTable.content_id, id))
