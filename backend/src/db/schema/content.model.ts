@@ -4,7 +4,7 @@ import {
   timestamp,
   varchar,
   boolean,
-  bigint
+  bigint,
 } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
@@ -12,18 +12,13 @@ import { sql } from 'drizzle-orm'
 import fileFormatEnum from './enum/fileFormat.enum'
 
 const contentTable = pgTable('Content', {
-  content_id: uuid('content_id')
-    .primaryKey()
-    .defaultRandom(),
+  content_id: uuid('content_id').primaryKey().defaultRandom(),
 
-  name: varchar('name', { length: 100 })
-    .notNull(),
+  name: varchar('name', { length: 100 }).notNull(),
 
-  size: bigint('size', {mode: "number"})
-    .notNull(),
+  size: bigint('size', { mode: 'number' }).notNull(),
 
-  format: fileFormatEnum('format')
-    .notNull(),
+  format: fileFormatEnum('format').notNull(),
 
   storage_path: varchar('storage_path', { length: 200 }),
 
@@ -40,9 +35,7 @@ const contentTable = pgTable('Content', {
     .defaultNow()
     .$onUpdate(() => sql`current_timestamp`),
 
-  active: boolean('active')
-    .notNull()
-    .default(true)
+  active: boolean('active').notNull().default(true),
 })
 
 const contentModelSchema = createSelectSchema(contentTable)

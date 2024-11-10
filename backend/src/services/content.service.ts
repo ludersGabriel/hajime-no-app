@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { AuthSchema } from '@/db/repo/auth.repo'
 import ContentRepo from '@/db/repo/content.repo'
 import type {

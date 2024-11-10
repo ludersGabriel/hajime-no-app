@@ -11,7 +11,6 @@ import env from '@/env'
 
 const service = Container.get(ContentService)
 
-
 // TODO: REVIEW USER ACCESS AND POLICIES
 const minio = new Client({
   endPoint: env.MINIO_ADDRESS,
@@ -19,8 +18,7 @@ const minio = new Client({
   useSSL: false,
   accessKey: env.S3_ACCESSKEY_USER,
   secretKey: env.S3_ACCESSKEY_PASS,
-});
-
+})
 
 export const contentRouter = honoWithJwt()
   .post(
@@ -34,8 +32,7 @@ export const contentRouter = honoWithJwt()
         const contentRet = contentSchemas.dto.parse(
           await service.create(context, input)
         )
-        return c.json({content: contentRet});
-
+        return c.json({ content: contentRet })
       } catch {
         return c.json(
           hajimeError({
@@ -104,42 +101,38 @@ export const contentRouter = honoWithJwt()
       }
     }
   )
-  .get(
-    '/:id',
-    zValidator('param', stringParamSchema),
-    async (c) => {
-      try {
-        const context = await c.get('jwtPayload')
-        const { id } = await c.req.valid('param')
+  .get('/:id', zValidator('param', stringParamSchema), async (c) => {
+    try {
+      const context = await c.get('jwtPayload')
+      const { id } = await c.req.valid('param')
 
-        const contentRet = contentSchemas.dto.parse(
-          await service.find(context, id)
-        )
+      const contentRet = contentSchemas.dto.parse(
+        await service.find(context, id)
+      )
 
-        return c.json({ content: contentRet })
-      } catch {
-        return c.json(
-          hajimeError({
-            status: 'error',
-            message: 'could not find content',
-            code: HttpStatus.BAD_REQUEST,
-            path: c.req.routePath,
-            suggestion: 'check the input and try again',
-          }),
-          HttpStatus.BAD_REQUEST
-        )
-      }
+      return c.json({ content: contentRet })
+    } catch {
+      return c.json(
+        hajimeError({
+          status: 'error',
+          message: 'could not find content',
+          code: HttpStatus.BAD_REQUEST,
+          path: c.req.routePath,
+          suggestion: 'check the input and try again',
+        }),
+        HttpStatus.BAD_REQUEST
+      )
     }
-  )
+  })
 
   .get(
     '/storage/:id',
     zValidator('param', stringParamSchema),
     async (c) => {
       try {
-        const { id } = await c.req.valid('param');
-        const res = await minio.presignedPutObject('datalake', id, 10);
-        return c.text(res);
+        const { id } = await c.req.valid('param')
+        const res = await minio.presignedPutObject('datalake', id, 10)
+        return c.text(res)
       } catch {
         return c.json(
           hajimeError({

@@ -1,10 +1,7 @@
 import { pgEnum } from 'drizzle-orm/pg-core'
 import { z } from 'zod'
 
-const fileFormatEnum = pgEnum(
-    'FileFormatEnum',
-    ['mp4', 'png', 'jpg']
-)
+const fileFormatEnum = pgEnum('FileFormatEnum', ['mp4', 'png', 'jpg'])
 
 export const fileFormatEnumSchema = z.enum(fileFormatEnum.enumValues)
 

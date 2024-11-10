@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ContentInput, ContentModel } from '@server/db/schema/content.model'
+import { ContentInput } from '@server/db/schema/content.model'
 
 export const Route = createFileRoute('/_auth/dashboard')({
   component: Dashboard,
@@ -9,7 +9,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useUploadContent } from '@client/api/content/content.query'
 import toast from 'react-hot-toast'
-
 
 export default function Dashboard() {
   const { user } = Route.useRouteContext()
@@ -30,28 +29,33 @@ export default function Dashboard() {
     setLoading(true)
 
     // get first file from list
-    const inputFile = formData.files[0];
+    const inputFile = formData.files[0]
 
     // get file format from filename
     // TODO: validate this shit somehow
-    const format = inputFile.name.split('.').pop() as "mp4" | "png" | "jpg";
+    const format = inputFile.name.split('.').pop() as
+      | 'mp4'
+      | 'png'
+      | 'jpg'
 
     const payload: ContentInput = {
       name: formData.name,
       size: inputFile.size,
-      format: format
+      format: format,
     }
 
-    content.mutate({content: payload, file: inputFile}, {
-      onSuccess: (data) => {
-      },
-      onError: (error) => {
-        toast.error('Content creation failed')
-      },
-      onSettled: () => {
-        setLoading(false)
-      },
-    })
+    content.mutate(
+      { content: payload, file: inputFile },
+      {
+        onSuccess: () => {},
+        onError: () => {
+          toast.error('Content creation failed')
+        },
+        onSettled: () => {
+          setLoading(false)
+        },
+      }
+    )
   }
 
   return (
