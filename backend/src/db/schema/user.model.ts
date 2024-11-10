@@ -5,9 +5,13 @@ import { sql } from 'drizzle-orm'
 import userRoleEnum from './enum/userRole.enum'
 
 const userTable = pgTable('User', {
-  user_id: uuid('user_id').primaryKey().defaultRandom(),
+  user_id: uuid('user_id')
+    .primaryKey()
+    .defaultRandom(),
 
-  role: userRoleEnum('role').notNull().default('user'),
+  role: userRoleEnum('role')
+    .notNull()
+    .default('user'),
 
   created_at: timestamp('created_at', {
     mode: 'string',

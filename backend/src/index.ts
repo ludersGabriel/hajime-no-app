@@ -10,6 +10,7 @@ import { prettyJSON } from 'hono/pretty-json'
 import { cors } from 'hono/cors'
 import { authRouter } from './routes/auth.route'
 import { jwt } from 'hono/jwt'
+import { contentRouter } from './routes/content.route'
 
 const basePath = '/api/v1'
 const app = new Hono()
@@ -30,6 +31,7 @@ const app = new Hono()
   .basePath(basePath)
   .route('/auth', authRouter)
   .route('/user', userRouter)
+  .route('/content', contentRouter)
 
 export default app
 export type AppType = typeof app

@@ -50,6 +50,20 @@
       "when": 1730838630670,
       "tag": "0006_fair_photon",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1731116634869,
+      "tag": "0007_adorable_moon_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1731199883422,
+      "tag": "0008_lean_landau",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,1 @@
+ALTER TABLE "Content" ALTER COLUMN "size" SET DATA TYPE bigint;

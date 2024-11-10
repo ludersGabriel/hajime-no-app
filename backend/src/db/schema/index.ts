@@ -12,10 +12,12 @@ import exerciseCategoryTable from './exerciseCategory.model'
 import contentTable from './content.model'
 
 import userRoleEnum from './enum/userRole.enum'
+import fileFormatEnum from './enum/fileFormat.enum'
 
 export {
   userTable,
   userRoleEnum,
+  fileFormatEnum,
   personalInfoTable,
   checkinTable,
   loginTable,
