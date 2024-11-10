@@ -1,10 +1,6 @@
 import { userQueryOptions } from '@client/api/user/user.query'
 import { useAuth } from '@client/auth'
-import {
-  createFileRoute,
-  Outlet,
-  redirect,
-} from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_auth')({
   component: AuthLayout,

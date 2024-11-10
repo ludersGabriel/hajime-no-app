@@ -1,21 +1,14 @@
 import React from 'react'
 
-interface PanelaModalProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface PanelaModalProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string
   isOpen: boolean
   onClose: () => void
   children: React.ReactNode
 }
 
-const PanelaModal = React.forwardRef<
-  HTMLDivElement,
-  PanelaModalProps
->(
-  (
-    { title, isOpen, onClose, children, className, ...props },
-    ref
-  ) => {
+const PanelaModal = React.forwardRef<HTMLDivElement, PanelaModalProps>(
+  ({ title, isOpen, onClose, children, className, ...props }, ref) => {
     const handleClose = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === e.currentTarget) {
         onClose()
@@ -34,9 +27,7 @@ const PanelaModal = React.forwardRef<
           className={`bg-[#FDF8EE] rounded-lg w-11/12 max-w-md relative pt-3 ${className}`}
           {...props}
         >
-          <h2 className='text-2xl font-medium text-center mb-4'>
-            {title}
-          </h2>
+          <h2 className='text-2xl font-medium text-center mb-4'>{title}</h2>
           <div className='overflow-y-auto max-h-[50vh] px-[5%] pb-3'>
             {children}
           </div>

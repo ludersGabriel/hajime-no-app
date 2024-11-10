@@ -50,4 +50,10 @@ export default class ContentRepo {
 
     return ret ? contentSchemas.model.parse(ret) : undefined
   }
+
+  async findMany(): Promise<ContentModel[]> {
+    return contentSchemas.model
+      .array()
+      .parse(await db.query.contentTable.findMany())
+  }
 }

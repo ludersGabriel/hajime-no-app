@@ -4,11 +4,7 @@ import { useAuth } from '@client/auth'
 import PanelaButton from '@client/components/PanelaButton'
 import PanelaInput from '@client/components/PanelaInput'
 import { AuthInput } from '@server/db/repo/auth.repo'
-import {
-  createFileRoute,
-  redirect,
-  useNavigate,
-} from '@tanstack/react-router'
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
 import { flushSync } from 'react-dom'
 import { useForm } from 'react-hook-form'

@@ -2,8 +2,7 @@ import { useState } from 'react'
 
 import Chevron from '../assets/chevron.svg'
 
-interface PanelaCollapsibleProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface PanelaCollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string
   children: React.ReactNode
 }

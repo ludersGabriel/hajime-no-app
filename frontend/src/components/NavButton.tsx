@@ -1,7 +1,6 @@
 import React from 'react'
 
-interface NavButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface NavButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   active?: boolean
 }

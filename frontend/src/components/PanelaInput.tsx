@@ -60,13 +60,11 @@ const PanelaInput = forwardRef<
       }
     }
 
-    const handleMouseDown = (
-      e: React.MouseEvent<HTMLButtonElement>
-    ) => e.preventDefault()
+    const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) =>
+      e.preventDefault()
 
     const defStyles = () => {
-      let styles =
-        'border-2 border-black shadow-[4px_4px_0px_#000000]'
+      let styles = 'border-2 border-black shadow-[4px_4px_0px_#000000]'
 
       if (error) {
         styles =

@@ -3,8 +3,7 @@ import Back from '../assets/back.svg'
 import Gear from '../assets/gear.svg'
 import PanelaLink from './PanelaLink'
 
-interface ScreenContainerProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ScreenContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   title?: string
   back?: boolean

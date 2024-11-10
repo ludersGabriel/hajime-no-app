@@ -55,4 +55,12 @@ export default class ContentService {
 
     return this.repo.find(id)
   }
+
+  async findMany(context: AuthSchema): Promise<ContentModel[]> {
+    if (context.role !== 'admin') {
+      throw new Error('Unauthorized')
+    }
+
+    return this.repo.findMany()
+  }
 }

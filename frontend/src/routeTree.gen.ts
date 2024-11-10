@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthDashboardImport } from './routes/_auth/dashboard'
+import { Route as AuthContentPlaygroundImport } from './routes/_auth/content-playground'
 
 // Create/Update Routes
 
@@ -29,6 +30,11 @@ const IndexRoute = IndexImport.update({
 
 const AuthDashboardRoute = AuthDashboardImport.update({
   path: '/dashboard',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthContentPlaygroundRoute = AuthContentPlaygroundImport.update({
+  path: '/content-playground',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -50,6 +56,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
+    '/_auth/content-playground': {
+      id: '/_auth/content-playground'
+      path: '/content-playground'
+      fullPath: '/content-playground'
+      preLoaderRoute: typeof AuthContentPlaygroundImport
+      parentRoute: typeof AuthImport
+    }
     '/_auth/dashboard': {
       id: '/_auth/dashboard'
       path: '/dashboard'
@@ -63,25 +76,28 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthRouteChildren {
+  AuthContentPlaygroundRoute: typeof AuthContentPlaygroundRoute
   AuthDashboardRoute: typeof AuthDashboardRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthContentPlaygroundRoute: AuthContentPlaygroundRoute,
   AuthDashboardRoute: AuthDashboardRoute,
 }
 
-const AuthRouteWithChildren =
-  AuthRoute._addFileChildren(AuthRouteChildren)
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthRouteWithChildren
+  '/content-playground': typeof AuthContentPlaygroundRoute
   '/dashboard': typeof AuthDashboardRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthRouteWithChildren
+  '/content-playground': typeof AuthContentPlaygroundRoute
   '/dashboard': typeof AuthDashboardRoute
 }
 
@@ -89,15 +105,21 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
+  '/_auth/content-playground': typeof AuthContentPlaygroundRoute
   '/_auth/dashboard': typeof AuthDashboardRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/dashboard'
+  fullPaths: '/' | '' | '/content-playground' | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/dashboard'
-  id: '__root__' | '/' | '/_auth' | '/_auth/dashboard'
+  to: '/' | '' | '/content-playground' | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_auth/content-playground'
+    | '/_auth/dashboard'
   fileRoutesById: FileRoutesById
 }
 
@@ -133,8 +155,13 @@ export const routeTree = rootRoute
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
+        "/_auth/content-playground",
         "/_auth/dashboard"
       ]
+    },
+    "/_auth/content-playground": {
+      "filePath": "_auth/content-playground.tsx",
+      "parent": "/_auth"
     },
     "/_auth/dashboard": {
       "filePath": "_auth/dashboard.tsx",

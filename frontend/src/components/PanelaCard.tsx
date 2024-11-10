@@ -1,5 +1,4 @@
-export interface PanelaCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface PanelaCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   label?: string
 }
